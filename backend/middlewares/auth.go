@@ -8,8 +8,11 @@ import (
 )
 
 func Authenticate(context *gin.Context) {
-	token := context.Request.Header.Get("Authorization")
-
+	token, err := context.Cookie("token")
+    if err != nil || token == "" {
+      // fallback to header (existing behavior)
+      token = context.GetHeader("Authorization")
+    }
 	if token == "" {
 		context.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"message": "Not authorized."})
 		return

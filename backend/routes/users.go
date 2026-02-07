@@ -25,7 +25,7 @@ func signup(context *gin.Context) {
 		return
 	}
 
-	context.JSON(http.StatusCreated, gin.H{"message": "User created successfully"})
+	context.JSON(http.StatusOK, gin.H{"code": 200, "data": gin.H{"message": "User created successfully"}})
 }
 
 func login(context *gin.Context) {
@@ -52,5 +52,10 @@ func login(context *gin.Context) {
 		return
 	}
 
-	context.JSON(http.StatusOK, gin.H{"message": "Login successful!", "token": token})
+	maxAge := 7 * 24 * 60 * 60
+	secure := false // true in prod (HTTPS)
+	httpOnly := true
+	context.SetCookie("token", token, maxAge, "/", "", secure, httpOnly)
+
+	context.JSON(http.StatusOK, gin.H{"code": 200, "data": gin.H{"message": "Login successful!"}})
 }
