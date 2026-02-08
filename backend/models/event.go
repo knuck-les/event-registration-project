@@ -133,3 +133,31 @@ func (e Event) CancelRegistration(userId int64) error {
 
 	return err
 }
+
+func GetEventsForUser(userId int64) ([]Event, error) {
+	query := `
+	SELECT e.id, e.name, e.description, e.location, e.dateTime, e.user_id
+	FROM events e
+	INNER JOIN registrations r ON e.id = r.event_id
+	WHERE r.user_id = ?`
+	rows, err := db.DB.Query(query, userId)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var events []Event
+
+	for rows.Next() {
+		var event Event
+		err := rows.Scan(&event.ID, &event.Name, &event.Description, &event.Location, &event.DateTime, &event.UserID)
+
+		if err != nil {
+			return nil, err
+		}
+
+		events = append(events, event)
+	}
+
+	return events, nil
+}

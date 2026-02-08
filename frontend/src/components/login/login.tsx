@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { loginRequest } from './Login.service';
-import Signup from '../signup/signup';
+import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState(''); // labeled username but sent as "email" by default
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -27,7 +28,8 @@ const Login = () => {
       if (!token) throw new Error('No token returned from login');
 
       // Persist token for later requests (backend expects raw token in Authorization header)
-      localStorage.setItem('token', token);
+      //localStorage.setItem('token', token);
+      navigate('/events');
     } catch (err: any) {
         alert(`Login failed: ${err.message}`);
     } finally {

@@ -1,5 +1,7 @@
 import { RouteObject } from "react-router-dom";
 import Signup from "../components/signup/signup";
+import CreateEvent from "../components/createEvent/CreateEvent";
+import Registrations from "../components/myRegistrations/registrations";
 
 const MainRoutes : RouteObject[] = [
     {
@@ -7,8 +9,16 @@ const MainRoutes : RouteObject[] = [
         element: <Signup />,
     },
     {
-        path: "/events/:id",
-        element: <div>Events Page</div>,
+        path: "/new-event",
+        element: <CreateEvent />,
+    },
+    {
+        path: "/events/:id/edit",
+        element: <CreateEvent />,
+    },
+    {
+        path: "/my-registrations",
+        element: <Registrations />,
     }
 ];
 
