@@ -15,6 +15,7 @@ func CORSMiddleware() gin.HandlerFunc {
     allowedOrigins := []string{
         "http://localhost:5173", // Vite default
         "http://localhost:3000", // CRA default (if used)
+		"http://100.50.152.104:8080", // IP address of backend server (if frontend is served separately)
     }
 
     // MaxAge in seconds (12 hours)
