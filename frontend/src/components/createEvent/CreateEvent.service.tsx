@@ -12,7 +12,7 @@ export type EventPayload = {
 
 // POST /events
 export async function createEvent(apiBase: string | undefined, payload: EventPayload) {
-    const base = apiBase || (import.meta as any).env?.VITE_API_BASE_URL || 'http://localhost:8080';
+    const base = (import.meta as any).env?.VITE_API_BASE_URL || 'http://100.50.152.104:8080';
     const token = localStorage.getItem('token');
 
     const res = await fetch(`${base}/events`, {
@@ -40,7 +40,7 @@ export async function createEvent(apiBase: string | undefined, payload: EventPay
 }
 
 export async function getEventById(apiBase: string | undefined, id: number) {
-    const base = apiBase || (import.meta as any).env?.VITE_API_BASE_URL || 'http://localhost:8080';
+    const base = apiBase || (import.meta as any).env?.VITE_API_BASE_URL || 'http://100.50.152.104:8080';
     const res = await fetch(`${base}/events/${id}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -52,7 +52,7 @@ export async function getEventById(apiBase: string | undefined, id: number) {
 }
 
 export async function updateEvent(apiBase: string | undefined, id: number, payload: any) {
-    const base = apiBase || (import.meta as any).env?.VITE_API_BASE_URL || 'http://localhost:8080';
+    const base = apiBase || (import.meta as any).env?.VITE_API_BASE_URL || 'http://100.50.152.104:8080';
     const token = localStorage.getItem('token');
     const res = await fetch(`${base}/events/${id}`, {
         method: 'PUT',
