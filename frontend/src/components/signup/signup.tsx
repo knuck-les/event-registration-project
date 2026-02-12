@@ -35,7 +35,7 @@ const Signup = () => {
     <>
       <form onSubmit={handleSubmit} style={{ maxWidth: 360, margin: '16px 0' }}>
         <div style={{ marginBottom: 8 }}>
-          <label style={{ display: 'block', marginBottom: 4 }}>Username / Email</label>
+          <label style={{ display: 'block', marginBottom: 4 }}>Username / EmailId</label>
           <input
             value={username}
             onChange={(e) => setUsername(e.target.value)}
