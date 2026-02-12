@@ -5,7 +5,7 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const apiBase = (import.meta as any).env?.VITE_API_BASE_URL || 'http://localhost:8080';
+  const apiBase = (import.meta as any).env?.VITE_API_BASE_URL || 'http://100.50.152.104:8080';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,38 +32,38 @@ const Signup = () => {
     }
   }
   return (
-  <>
-    <form onSubmit={handleSubmit} style={{ maxWidth: 360, margin: '16px 0' }}>
-      <div style={{ marginBottom: 8 }}>
-        <label style={{ display: 'block', marginBottom: 4 }}>Username / Email</label>
-        <input
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-          style={{ width: '100%', padding: 8 }}
-          placeholder="you@example.com"
-        />
-      </div>
+    <>
+      <form onSubmit={handleSubmit} style={{ maxWidth: 360, margin: '16px 0' }}>
+        <div style={{ marginBottom: 8 }}>
+          <label style={{ display: 'block', marginBottom: 4 }}>Username / Email</label>
+          <input
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+            style={{ width: '100%', padding: 8 }}
+            placeholder="you@example.com"
+          />
+        </div>
 
-      <div style={{ marginBottom: 8 }}>
-        <label style={{ display: 'block', marginBottom: 4 }}>Password</label>
-        <input
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          required
-          style={{ width: '100%', padding: 8 }}
-        />
-      </div>
+        <div style={{ marginBottom: 8 }}>
+          <label style={{ display: 'block', marginBottom: 4 }}>Password</label>
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            required
+            style={{ width: '100%', padding: 8 }}
+          />
+        </div>
 
-      <div>
-        <button type="submit" disabled={loading} style={{ padding: '8px 12px' }}>
-          {loading ? 'Signing in…' : 'Sign up'}
-        </button>
-      </div>
-    </form>
-     <button onClick={() => window.location.href = '/login'} style={{ padding: '8px 12px' }}>
-          Back to sign in
+        <div>
+          <button type="submit" disabled={loading} style={{ padding: '8px 12px' }}>
+            {loading ? 'Signing in…' : 'Sign up'}
+          </button>
+        </div>
+      </form>
+      <button onClick={() => window.location.href = '/login'} style={{ padding: '8px 12px' }}>
+        Back to sign in
       </button>
     </>
   );

@@ -9,7 +9,7 @@ export default function EventTable() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    const apiBase = (import.meta as any).env?.VITE_API_BASE_URL || 'http://localhost:8080';
+    const apiBase = (import.meta as any).env?.VITE_API_BASE_URL || 'http://100.50.152.104:8080';
 
     useEffect(() => {
         fetchData();
@@ -29,14 +29,14 @@ export default function EventTable() {
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log("events updated:", events);
-    },[events])
+    }, [events])
 
     const deleteEventWithId = async (id: number) => {
         if (!window.confirm(`Are you sure you want to delete event ID ${id}?`)) return;
         try {
-            const base = apiBase || (import.meta as any).env?.VITE_API_BASE_URL || 'http://localhost:8080';
+            const base = apiBase || (import.meta as any).env?.VITE_API_BASE_URL || 'http://100.50.152.104:8080';
             const res = await deleteEvent(base, id)
             // Refresh list after deletion
             fetchData();
@@ -45,20 +45,20 @@ export default function EventTable() {
         }
     }
 
-     const RegisterEventWithId = async (id: number) => {
+    const RegisterEventWithId = async (id: number) => {
         if (!window.confirm(`Are you sure you want to register for event ID ${id}?`)) return;
         try {
-            const base = apiBase || (import.meta as any).env?.VITE_API_BASE_URL || 'http://localhost:8080';
+            const base = apiBase || (import.meta as any).env?.VITE_API_BASE_URL || 'http://100.50.152.104:8080';
             const res = await registerEvent(base, id)
         } catch (e: any) {
             alert(`Failed to register for event: ${e?.message || e}`);
         }
     }
 
-     const UnRegisterEventWithId = async (id: number) => {
+    const UnRegisterEventWithId = async (id: number) => {
         if (!window.confirm(`Are you sure you want to unregister for event ID ${id}?`)) return;
         try {
-            const base = apiBase || (import.meta as any).env?.VITE_API_BASE_URL || 'http://localhost:8080';
+            const base = apiBase || (import.meta as any).env?.VITE_API_BASE_URL || 'http://100.50.152.104:8080';
             const res = await unRegisterEvent(base, id)
             // Refresh list after deletion
             fetchData();
@@ -73,7 +73,7 @@ export default function EventTable() {
             <button onClick={() => (window.location.href = '/new-event')} style={{ marginBottom: 16, padding: '8px 12px' }}>
                 Add New Event
             </button>
-             <button onClick={() => (window.location.href = '/my-registrations')} style={{ marginBottom: 16, padding: '8px 12px' }}>
+            <button onClick={() => (window.location.href = '/my-registrations')} style={{ marginBottom: 16, padding: '8px 12px' }}>
                 My Registrations
             </button>
             <div style={{ marginBottom: 8 }}>

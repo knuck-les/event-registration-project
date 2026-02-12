@@ -3,29 +3,29 @@ import { getEvents, EventItem } from '../events/Events.service';
 import { getMyRegistrations } from './registrations.service';
 const Registrations = () => {
 
-     const [events, setEvents] = useState<EventItem[]>([]);
-        const [loading, setLoading] = useState(false);
-        const [error, setError] = useState<string | null>(null);
-    
-        const apiBase = (import.meta as any).env?.VITE_API_BASE_URL || 'http://localhost:8080';
-    
-        useEffect(() => {
-            fetchData();
-            // eslint-disable-next-line react-hooks/exhaustive-deps
-        }, []);
-    
-        async function fetchData() {
-            setLoading(true);
-            setError(null);
-            try {
-                const data = await getMyRegistrations(apiBase);
-                setEvents(data.data);
-            } catch (e: any) {
-                setError(e?.message || 'Failed to fetch events');
-            } finally {
-                setLoading(false);
-            }
+    const [events, setEvents] = useState<EventItem[]>([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+
+    const apiBase = (import.meta as any).env?.VITE_API_BASE_URL || 'http://100.50.152.104:8080';
+
+    useEffect(() => {
+        fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    async function fetchData() {
+        setLoading(true);
+        setError(null);
+        try {
+            const data = await getMyRegistrations(apiBase);
+            setEvents(data.data);
+        } catch (e: any) {
+            setError(e?.message || 'Failed to fetch events');
+        } finally {
+            setLoading(false);
         }
+    }
 
     return (
         <div style={{ padding: 16 }}>
