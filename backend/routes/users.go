@@ -2,7 +2,7 @@ package routes
 
 import (
 	"net/http"
-
+	"time"
 	"example.com/rest-api/models"
 	"example.com/rest-api/utils"
 	"github.com/gin-gonic/gin"
@@ -55,7 +55,23 @@ func login(context *gin.Context) {
 	maxAge := 7 * 24 * 60 * 60
 	secure := false // true in prod (HTTPS)
 	httpOnly := true
-	context.SetCookie("token", token, maxAge, "/", "", secure, httpOnly)
+	// Create cookie with explicit SameSite attribute
+    cookie := &http.Cookie{
+        Name:     "token",
+        Value:    token,
+        Path:     "/",
+        Domain:   "", // optional: set if you need cross-subdomain cookies
+        Expires:  time.Now().Add(time.Duration(maxAge) * time.Second),
+        MaxAge:   maxAge,
+        HttpOnly: httpOnly,
+        Secure:   secure,
+        // Choose SameSite mode:
+        // - http.SameSiteNoneMode for cross-site (requires Secure=true)
+        // - http.SameSiteLaxMode for same-site with some cross-site top-level navigation allowed
+        // - http.SameSiteStrictMode for strict same-site only
+        SameSite: http.SameSiteNoneMode,
+    }
 
+    http.SetCookie(context.Writer, cookie)
 	context.JSON(http.StatusOK, gin.H{"code": 200, "data": gin.H{"message": "Login successful!"}})
 }
