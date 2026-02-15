@@ -13,7 +13,7 @@ const Signup = () => {
 
     try {
       // IMPORTANT: repo backend uses "email" field for login; if your backend expects "username",
-      // change the body to { username, password }.
+      // change the body to { username, password } .
       const body = { email: username, password };
 
       const res = await signupRequest(apiBase, username, password);
