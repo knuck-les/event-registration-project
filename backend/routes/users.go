@@ -53,7 +53,7 @@ func login(context *gin.Context) {
 	}
 
 	maxAge := 7 * 24 * 60 * 60
-	secure := false // true in prod (HTTPS)
+	secure := true // true in prod (HTTPS)
 	httpOnly := true
 	// Create cookie with explicit SameSite attribute
     cookie := &http.Cookie{
