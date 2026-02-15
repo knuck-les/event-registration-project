@@ -3,6 +3,7 @@ package routes
 import (
 	"net/http"
 	"time"
+	"log"
 	"example.com/rest-api/models"
 	"example.com/rest-api/utils"
 	"github.com/gin-gonic/gin"
@@ -73,5 +74,9 @@ func login(context *gin.Context) {
     }
 
     http.SetCookie(context.Writer, cookie)
+
+	// Helpful debug log (remove in production)
+    log.Printf("Set-Cookie: name=%s Secure=%v SameSite=%v\n", cookie.Name, cookie.Secure, cookie.SameSite)
+
 	context.JSON(http.StatusOK, gin.H{"code": 200, "data": gin.H{"message": "Login successful!"}})
 }
