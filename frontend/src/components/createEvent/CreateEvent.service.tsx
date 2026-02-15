@@ -24,7 +24,7 @@ export async function createEvent(apiBase: string | undefined, payload: EventPay
         credentials: 'include',
         // if you switched to cookie-based auth use:
         // credentials: 'include',
-    } as RequestInit);
+    });
 
     if (!res.ok) {
         const txt = await res.text();

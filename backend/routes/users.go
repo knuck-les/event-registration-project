@@ -54,14 +54,7 @@ func login(context *gin.Context) {
 	}
 
 	maxAge := 7 * 24 * 60 * 60
-	secure := false
-	if r := context.Request; r != nil {
-	if r.TLS != nil || r.Header.Get("X-Forwarded-Proto") == "https" {
-		secure = true
-	}
-	}
-	sameSite := http.SameSiteLaxMode
-	if secure { sameSite = http.SameSiteNoneMode }
+
 
 	cookie := &http.Cookie{
 	Name:     "token",
@@ -70,8 +63,8 @@ func login(context *gin.Context) {
 	Expires:  time.Now().Add(time.Duration(maxAge) * time.Second),
 	MaxAge:   maxAge,
 	HttpOnly: true,
-	Secure:   secure,
-	SameSite: sameSite,
+	Secure:   false,
+	SameSite: http.SameSiteNoneMode,
 	}
 	http.SetCookie(context.Writer, cookie)
 
