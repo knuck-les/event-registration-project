@@ -7,7 +7,7 @@ const Registrations = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    const apiBase = (import.meta as any).env?.VITE_API_BASE_URL || 'http://100.50.152.104:8080';
+    const apiBase = (import.meta as any).env?.VITE_API_BASE_URL || 'https://eventregistration.duckdns.org';
 
     useEffect(() => {
         fetchData();

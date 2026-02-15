@@ -4,7 +4,7 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { getEventById, createEvent, updateEvent } from './CreateEvent.service';
 import { EventPayload } from './CreateEvent.service';
 export default function CreateEvent() {
-    const apiBase = (import.meta as any).env?.VITE_API_BASE_URL || 'http://100.50.152.104:8080';
+    const apiBase = (import.meta as any).env?.VITE_API_BASE_URL || 'https://eventregistration.duckdns.org';
     const params = useParams<{ id: string }>();
     const location = useLocation();
     const navigate = useNavigate();

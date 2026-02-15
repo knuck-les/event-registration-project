@@ -9,7 +9,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const apiBase = (import.meta as any).env?.VITE_API_BASE_URL || 'http://100.50.152.104:8080';
+    const apiBase = (import.meta as any).env?.VITE_API_BASE_URL || 'https://eventregistration.duckdns.org';
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

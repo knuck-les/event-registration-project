@@ -8,7 +8,7 @@ export type EventItem = {
 };
 
 export async function getEvents(apiBase?: string): Promise<EventItem[]> {
-    const base = (import.meta as any).env?.VITE_API_BASE_URL || 'http://100.50.152.104:8080';
+    const base = (import.meta as any).env?.VITE_API_BASE_URL || 'https://eventregistration.duckdns.org';
     const token = localStorage.getItem('token');
 
     const res = await fetch(`${base}/events`, {

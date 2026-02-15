@@ -63,7 +63,7 @@ func login(context *gin.Context) {
 	Expires:  time.Now().Add(time.Duration(maxAge) * time.Second),
 	MaxAge:   maxAge,
 	HttpOnly: true,
-	Secure:   false,
+	Secure:   true,
 	SameSite: http.SameSiteNoneMode,
 	}
 	http.SetCookie(context.Writer, cookie)

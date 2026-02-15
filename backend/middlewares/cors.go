@@ -16,6 +16,7 @@ func CORSMiddleware() gin.HandlerFunc {
         "http://localhost:5173", // Vite default
         "http://localhost:3000", // CRA default (if used)
 		"http://eventregistration-frontend.s3-website-us-east-1.amazonaws.com", // IP address of backend server (if frontend is served separately)
+        "https://d2jsid6g12i41.cloudfront.net", // CloudFront URL for frontend
     }
 
     // MaxAge in seconds (12 hours)
