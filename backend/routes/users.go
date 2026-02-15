@@ -1,7 +1,6 @@
 package routes
 
 import (
-	"log"
 	"net/http"
 	"time"
 
@@ -55,26 +54,26 @@ func login(context *gin.Context) {
 	}
 
 	maxAge := 7 * 24 * 60 * 60
-	httpOnly := true
-
-	// If the incoming request is over TLS, mark Secure=true and allow SameSite=None
-	// (SameSite=None requires Secure=true in browsers). For local HTTP dev we use
-	// SameSite=Lax so the cookie can be set without TLS.
 	secure := false
-
-	// Create cookie with explicit SameSite attribute
-	cookie := &http.Cookie{
-		Name:     "token",
-		Value:    token,
-		Path:     "/",
-		Expires:  time.Now().Add(time.Duration(maxAge) * time.Second),
-		MaxAge:   maxAge,
-		HttpOnly: httpOnly,
-		Secure:   secure,
-		SameSite: http.SameSiteNoneMode,
+	if r := context.Request; r != nil {
+	if r.TLS != nil || r.Header.Get("X-Forwarded-Proto") == "https" {
+		secure = true
 	}
+	}
+	sameSite := http.SameSiteLaxMode
+	if secure { sameSite = http.SameSiteNoneMode }
 
+	cookie := &http.Cookie{
+	Name:     "token",
+	Value:    token,
+	Path:     "/",
+	Expires:  time.Now().Add(time.Duration(maxAge) * time.Second),
+	MaxAge:   maxAge,
+	HttpOnly: true,
+	Secure:   secure,
+	SameSite: sameSite,
+	}
 	http.SetCookie(context.Writer, cookie)
-	
+
 	context.JSON(http.StatusOK, gin.H{"code": 200, "data": gin.H{"message": "Login successful!"}})
 }
